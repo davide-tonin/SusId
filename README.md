@@ -12,6 +12,43 @@ All encoded into 16 bytes, perfect for a standard `UUID` column.
 
 ---
 
+## Installations
+
+You can pull SusId into your project via Maven or Gradle:
+
+<details>
+<summary>Maven</summary>
+
+```xml
+<dependency>
+  <groupId>eu.davide</groupId>
+  <artifactId>susid</artifactId>
+  <version>1.0.0</version>
+</dependency>
+```
+
+</details>
+
+<details>
+<summary>Gradle (Groovy)</summary>
+
+```groovy
+implementation 'eu.davide:susid:1.0.0'
+```
+
+</details>
+
+<details>
+<summary>Gradle (Kotlin)</summary>
+
+```kotlin
+implementation("eu.davide:susid:1.0.0")
+```
+
+</details>
+
+---
+
 ## Features
 
 * **Self‑validation**: Quick sanity‑check via a truncated SHA‑256 signature avoids unnecessary DB lookups on invalid IDs.
@@ -75,7 +112,7 @@ In `SusIdInfo`, `typeId == 255` and `typeDesc == "Untyped"`.
 
 ## Thread Safety & Performance
 
-* `generate(...)`/\`\` are thread‑safe.
+* `generate(...)`/`decode(...)` are thread‑safe.
 * Internally uses a `ThreadLocal<MessageDigest>` so each thread reuses its `SHA-256` instance.
 * No intermediate allocations beyond the final 16‑byte buffer and small temp arrays.
 
@@ -95,4 +132,4 @@ Included JUnit tests cover:
 
 ## License
 
-This project is licensed under the MIT License – see the [LICENSE](./LICENSE) file for details.
+This project is licensed under the Apache License, Version 2.0 – see the [LICENSE](./LICENSE) file for details.
