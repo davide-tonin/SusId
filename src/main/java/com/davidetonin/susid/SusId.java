@@ -110,7 +110,7 @@ public class SusId {
         RAND.nextBytes(rnd);
         System.arraycopy(rnd, 0, id, TIMESTAMP_BYTES, randomBytes);
 
-        // type & secret
+        // type and secret
         id[TIMESTAMP_BYTES + randomBytes]       = (byte) typeId;
         int secretId = secretIds[RAND.nextInt(secretIds.length)];
         id[TIMESTAMP_BYTES + randomBytes + 1]   = (byte) secretId;
