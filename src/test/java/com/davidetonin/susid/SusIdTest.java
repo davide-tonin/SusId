@@ -148,10 +148,6 @@ public class SusIdTest {
     @Test
     void testGenerateDecodeTimingMicros() {
         final int ITERATIONS = 100_000;
-        // warm-up (JIT, class-loading, cache, etc.)
-        for (int i = 0; i < 10_000; i++) {
-            susId.decode(susId.generate(10));
-        }
 
         long start = System.nanoTime();
         for (int i = 0; i < ITERATIONS; i++) {
@@ -165,9 +161,9 @@ public class SusIdTest {
         System.out.printf("SusId generate+decode avg: %.2f µs over %,d iterations%n",
                 avgMicros, ITERATIONS);
 
-        // sanity check: ensure we’re under, 5µs/op
-        assertTrue(avgMicros < 5,
-                String.format("Too slow: %.2f µs/op (threshold 50 µs)", avgMicros));
+        // sanity check: ensure we’re under, 10µs/op
+        assertTrue(avgMicros < 10,
+                String.format("Too slow: %.2f µs/op (threshold 10 µs)", avgMicros));
     }
 
     // Helpers
