@@ -48,6 +48,8 @@ public class SusId {
 
     /**
      * Defaults to a 2-byte signature.
+     * @param secrets        mapping of secretId to secret value (max 256 entries)
+     * @param types          mapping of typeId to description (max 255 entries)
      * @see #SusId(Map, Map, int)
      */
     public SusId(Map<Integer,String> secrets, Map<Integer,String> types) {
@@ -55,6 +57,7 @@ public class SusId {
     }
 
     /**
+     * Creates a SusId with a map of secrets and types.
      * @param secrets        mapping of secretId to secret value (max 256 entries)
      * @param types          mapping of typeId to description (max 255 entries)
      * @param signatureBytes number of signature bytes (1–4; reduces randomness accordingly)
