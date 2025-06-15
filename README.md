@@ -1,12 +1,16 @@
 # SusId
 
-## TL;DR – Why SusId?
+### TL;DR – Why SusId?
 
 🧠 UUID-compatible — drop-in replacement for UUID columns  
 🔐 Let you say "this ID probably came from me" or "definitely not mine" (no DB lookup needed)  
 🕓 Time-ordered — your indexes thank you  
 🧩 Embeds a typeId — so you know what entity the ID was for  
 ⚙️ Tunable signature length — trade off between randomness and validation paranoia
+
+---
+
+## Description
 
 SusId provides compact, self‑describing, UUID‑compatible identifiers that embed:
 
