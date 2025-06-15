@@ -145,6 +145,31 @@ public class SusIdTest {
         assertThrows(IllegalArgumentException.class, () -> new SusId(secrets, types, 5));
     }
 
+    @Test
+    void testGenerateDecodeTimingMicros() {
+        final int ITERATIONS = 100_000;
+        // warm-up (JIT, class-loading, cache, etc.)
+        for (int i = 0; i < 10_000; i++) {
+            susId.decode(susId.generate(10));
+        }
+
+        long start = System.nanoTime();
+        for (int i = 0; i < ITERATIONS; i++) {
+            UUID id   = susId.generate(10);
+            SusIdInfo info = susId.decode(id);
+            if (!info.valid()) fail("Signature invalid on iteration " + i);
+        }
+        long elapsedNs = System.nanoTime() - start;
+
+        double avgMicros = elapsedNs / 1_000.0 / ITERATIONS;
+        System.out.printf("SusId generate+decode avg: %.2f µs over %,d iterations%n",
+                avgMicros, ITERATIONS);
+
+        // sanity check: ensure we’re under, 5µs/op
+        assertTrue(avgMicros < 5,
+                String.format("Too slow: %.2f µs/op (threshold 50 µs)", avgMicros));
+    }
+
     // Helpers
     private static byte[] asBytes(UUID uuid) {
         byte[] b = new byte[16];
