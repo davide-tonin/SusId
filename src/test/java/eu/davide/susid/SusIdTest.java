@@ -1,4 +1,4 @@
-package com.davidetonin.susid;
+package eu.davide.susid;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.time.Duration;
@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.UUID;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import com.davidetonin.susid.SusId.SusIdInfo;
+import eu.davide.susid.SusId.SusIdInfo;
 
 public class SusIdTest {
     private static Map<Integer, String> secrets;

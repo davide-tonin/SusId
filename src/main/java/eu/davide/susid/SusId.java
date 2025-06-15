@@ -3,7 +3,7 @@
  * Licensed under the Apache License, Version 2.0: https://opensource.org/license/apache-2-0
  */
 
-package com.davidetonin.susid;
+package eu.davide.susid;
 
 import java.security.MessageDigest;
 import java.security.SecureRandom;

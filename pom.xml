@@ -8,7 +8,7 @@
     <description>Compact, timestamped UUID‐style identifiers with embedded type and SHA256 truncated signature for on-the-fly sanity checks.</description>
     <url>https://github.com/davide-tonin/SusId</url>
 
-    <groupId>com.davidetonin</groupId>
+    <groupId>eu.davide</groupId>
     <artifactId>susid</artifactId>
     <version>1.0.0</version>
 
