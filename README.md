@@ -2,25 +2,39 @@
 
 ### TL;DR – Why SusId?
 
-🧠 UUID-compatible — drop-in replacement for UUID columns  
-🔐 Let you say "this ID probably came from me" or "definitely not mine" (no DB lookup needed)  
-🕓 Time-ordered — your indexes thank you  
-🧩 Embeds a typeId — so you know what entity the ID was for  
-⚙️ Tunable signature length — trade off between randomness and validation paranoia
+It's an **optimization**.
+
+* Let you say "this ID probably came from me" or "definitely not mine" without database lookup.
+* Embeds a typeId, so you know what entity the ID was for.
+* UUID-compatible — drop-in replacement for UUID columns
+* Time-ordered — 'cause your indexes
+* Tunable signature length
+
+**It's not auth.**
+
+I swear that if you use it to auth your api and I find out I'm gonna tell your mum.
 
 ---
 
-## Description
+## Structure
 
-SusId provides compact, self‑describing, UUID‑compatible identifiers that embed:
+SusId is a structured identifier that embeds:
 
-* **Timestamp** (48 bits)
-* **Randomness** (up to 56 bits, depending on signature length)
-* **TypeId** (8 bits; 0–254 for custom types, 255 = **untyped**)
-* **SecretId** (8 bits)
-* **Signature** (truncated SHA‑256; 1–4 bytes)
+* `Timestamp` 6 bytes
+* `Randomness` tunable, between 4 and 7 bytes
+* `TypeId` 1 byte
+* `SecretId` 1 byte
+* `Signature` tunable, between 1 and 4 bytes
 
-All encoded into 16 bytes, perfect for a standard `UUID` column.
+All encoded into 16 bytes, to fit in a standard `UUID` column.
+
+---
+
+## Features
+
+* **Self‑validation**: Quick sanity‑check via a truncated SHA‑256 signature avoids unnecessary DB lookups on invalid IDs.
+* **Decodable**: Extract `Timestamp`, `TypeId`, `SecretId`, and `Signature` without any external service.
+* **Tunable trade‑off**: Tune signature length between 1 and 4 bytes. More signature bytes -> less randomness.
 
 ---
 
@@ -58,15 +72,6 @@ implementation("eu.davide:susid:1.0.0")
 ```
 
 </details>
-
----
-
-## Features
-
-* **Self‑validation**: Quick sanity‑check via a truncated SHA‑256 signature avoids unnecessary DB lookups on invalid IDs.
-* **Decodable**: Extract timestamp, `typeId`, `secretId`, and signature without any external service.
-* **Tunable trade‑off**: Dial signature length between 1 and 4 bytes. More signature bytes ⇆ less randomness.
-* **Untyped ID**: Call `generate()` (no args) to produce an ID with `typeId = 255`.
 
 ---
 
